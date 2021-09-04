@@ -45,7 +45,7 @@ var asrorbek = new Student({
   }
 }); */
 
-var app = new Vue({
+/* var app = new Vue({
   el: '#app',
   data: {
     movies: [
@@ -54,21 +54,24 @@ var app = new Vue({
         title: 'Harry Potter',
         description: 'lorem 1',
         year: 2000,
-        likes: 0
+        likes: 0,
+        ratingColor: 'yellow'
       },
       {
         id: 'tt0295297',
         title: 'Harry Potter 2',
         description: 'lorem 2',
         year: 2003,
-        likes: 10
+        likes: 10,
+        ratingColor: 'orange'
       },
       {
         id: 'tt0304141',
         title: 'Harry Potter 3',
         description: 'lorem 3',
         year: 2005,
-        likes: 20
+        likes: 20,
+        ratingColor: 'orangered'
       }
     ]
   },
@@ -78,6 +81,26 @@ var app = new Vue({
     },
     dislikeMovie (movie) {
       movie.likes--;
+    }
+  }
+}); */
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    search: '',
+    movies: []
+  },
+  methods: {
+    searchMovies () {
+      fetch(`https://www.omdbapi.com/?apikey=7931b303&s=${this.search}`)
+        .then(response => response.json())
+        .then(data => {
+          console.log(data);
+          if (data.Response === "True") {
+            this.movies = data.Search;
+          }
+        });
     }
   }
 });
